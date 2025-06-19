@@ -24,7 +24,7 @@ const parseEmojiPoint = (content:string) => {
     }
 }
 
-const EmojiPoint = ({point, index}: {point: String; index:number}) => {
+const EmojiPoint = ({point, index}: {point: string; index:number}) => {
     const { emoji, text } = parseEmojiPoint(point) || { emoji: '', text: '' };
     return (
         <MotionDiv variants={itemVariants} key={`point-${index}`}
@@ -42,7 +42,7 @@ const EmojiPoint = ({point, index}: {point: String; index:number}) => {
     );
 }
 
-const RegularPoint = ({point, index}: {point: String; index:number}) => {
+const RegularPoint = ({point, index}: {point: string; index:number}) => {
     return (
         <MotionDiv variants={itemVariants} className="group relative bg-linear-to-br from-gray-200/[0.08] to-gray-400/[0.03] p-4
             rounded-2xl border border-gray-500/10 hover:shadow-lg transition-all"
@@ -56,8 +56,8 @@ const RegularPoint = ({point, index}: {point: String; index:number}) => {
 }
 
 const ContentSection = ({title, points}: {
-    title?: String;
-    points: String[];
+    title?: string;
+    points: string[];
 }) => {
   return (
     <MotionDiv variants={containerVariants} 

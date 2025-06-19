@@ -30,8 +30,8 @@ const UploadForm = () => {
             onUploadError: (err) => {
                 console.error("Upload error:", err);
             },
-            onUploadBegin: ({userFile}) => {
-                console.log("Upload started for file:", userFile);
+            onUploadBegin: (fileName) => {
+                console.log("Upload started for file:", fileName);
             }
         }
     );
@@ -71,7 +71,7 @@ const UploadForm = () => {
 
             // Parse the PDF using langchain
             // Summarize the PDF using Gemini
-            const summary = await generatePDFSummary(res);
+            const summary = await generatePDFSummary([res[0]]);
 
             const { data = null, message = null } = summary || {};
 

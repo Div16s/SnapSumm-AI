@@ -27,9 +27,21 @@ export const MyFileRouter = {
             console.log("Metadata:", metadata);
             return {
                 userId: metadata.userId,
-                file: file,
-            }
+                file: {
+                    url: file.ufsUrl,
+                    name: file.name,
+                }
+            };
         }
+
+        // async ({metadata, file}) => {
+        //     console.log("File uploaded successfully:", file);
+        //     console.log("Metadata:", metadata);
+        //     return {
+        //         userId: metadata.userId,
+        //         file: file,
+        //     }
+        // }
     )
 } satisfies FileRouter;
 

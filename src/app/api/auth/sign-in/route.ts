@@ -17,7 +17,7 @@ export const POST = async (req: Request) => {
         email: user.email,
         subscriptionId: user.subscription_id,
     }
-    const token = signJWT(payload, '1d');
+    const token = signJWT(payload, 1 * 60 * 60);
     const cookieStore = await cookies();
     cookieStore.set("token", token, {
         httpOnly: true,

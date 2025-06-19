@@ -40,36 +40,64 @@ export const PricingPlans: Plan[] = [
     }
 ];
 
-export const containerVariants = {
-    hidden: {opacity: 0},
-    visible: {
-        opacity: 1,
-        transition: {
-            staggerChildren: 0.1,
-            delayChildren: 0.2
-        }
-    }
-}
+// export const containerVariants = {
+//     hidden: {opacity: 0},
+//     visible: {
+//         opacity: 1,
+//         transition: {
+//             staggerChildren: 0.1,
+//             delayChildren: 0.2
+//         }
+//     }
+// }
 
-export const itemVariants = {
-    hidden: {opacity: 0, y: 20},
-    visible: {
-        opacity: 1, 
-        transition: {
-            type: "spring",
-            stiffness: 50,
-            damping: 15,
-            duration: 0.8
-        }
-    }
-}
+// export const itemVariants = {
+//     hidden: {opacity: 0, y: 20},
+//     visible: {
+//         opacity: 1, 
+//         transition: {
+//             type: "spring",
+//             stiffness: 50,
+//             damping: 15,
+//             duration: 0.8
+//         }
+//     }
+// }
 
 export const buttonVariants = {
     scale: 1.05,
     transition: {
-        type: "spring",
+        type: "spring" as const,
         stiffness: 300,
         damping: 10,
         duration: 0.3
     }
 }
+
+export const containerVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: "spring" as const,
+      stiffness: 100,
+      damping: 20,
+      duration: 0.5,
+    },
+  },
+};
+
+export const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: "spring" as const,
+      stiffness: 100,
+      damping: 20,
+      duration: 0.5,
+    },
+  },
+};

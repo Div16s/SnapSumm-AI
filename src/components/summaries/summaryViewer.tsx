@@ -24,7 +24,11 @@ const SummaryViewer = ({summary}:{summary: string}) => {
         .split('\n# ')
         .map((section) => section.trim())
         .filter(Boolean)
-        .map(parseSection);
+        .map(parseSection)
+        .map(section => ({
+            ...section,
+            points: section.points.map((point: any) => String(point)),
+        }));
 
     const handlePrevious = () => {
         setCurrentSection((prev) => Math.max(prev - 1, 0));

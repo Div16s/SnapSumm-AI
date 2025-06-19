@@ -1,4 +1,4 @@
-import jwt from 'jsonwebtoken';
+import jwt, { SignOptions } from 'jsonwebtoken';
 import getENV from '@/lib/env';
 
 type JWTPayload = {
@@ -9,9 +9,19 @@ type JWTPayload = {
 
 const JWT_SECRET = getENV('JWT_SECRET');
 
-const signJWT = (payload: JWTPayload, expiresIn: string = '1h'): string => {
-    return jwt.sign(payload, JWT_SECRET, { expiresIn });
+if (!JWT_SECRET) {
+    throw new Error('JWT_SECRET environment variable is not set');
 }
+
+const signJWT = (payload: JWTPayload, expiresIn: number = 1): string => {
+    const options: SignOptions = {
+        expiresIn,
+    };
+    return jwt.sign(payload, JWT_SECRET as jwt.Secret, options);
+}
+// const signJWT = (payload: JWTPayload, expiresIn: string = '1h'): string => {
+//     return jwt.sign(payload, JWT_SECRET as string, { expiresIn });
+// }
 
 const verifyJWT = (token: string) => {
     try {

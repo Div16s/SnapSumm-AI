@@ -7,11 +7,11 @@ const PricingSectionWrapper = async () => {
     console.log("🔍 Current user:", user);
     if (!user) {
         console.warn("⚠️ No user found, returning empty PlanBadge");
-        return <PricingSection priceId={""} />;
+        return <PricingSection />;
     }
     const priceId = await GetUserPlan(user?.email);
 
-    return <PricingSection priceId={priceId} />;
+    return <PricingSection />;
 };
 
 export default PricingSectionWrapper;

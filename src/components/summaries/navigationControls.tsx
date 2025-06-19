@@ -85,7 +85,7 @@ const NavigationControls = ({
                 <Button
                     ref={(el) => { buttonRefs.current[index] = el; }}
                     key={index}
-                    variant={currentSection === index ? "solid" : "outline"}
+                    variant={currentSection === index ? "default" : "outline"}
                     size="icon"
                     onClick={() => onSectionSelect(index)}
                     className={cn(
