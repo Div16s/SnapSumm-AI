@@ -35,8 +35,8 @@ export const PricingPlans: Plan[] = [
             "24/7 support",
             "Markdown export",
         ],
-        paymentLink:  process.env.NODE_ENV === "development" ? "https://buy.stripe.com/test_cNieV6bed7RZ1YZ59tdAk00" : "",
-        priceId: process.env.NODE_ENV === "development" ? "price_1RZvfY4JZffiHFZWI90JuH4X" : "",
+        paymentLink:  "https://buy.stripe.com/test_cNieV6bed7RZ1YZ59tdAk00",
+        priceId: "price_1RZvfY4JZffiHFZWI90JuH4X",
     }
 ];
 
