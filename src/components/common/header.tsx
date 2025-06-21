@@ -1,11 +1,8 @@
 import NavLink from './navLink';
 import { FileText } from 'lucide-react';
-import { useAuth } from '@/context/authContext';
 import UserDropdown from '@/components/common/userDropDown';
 import PlanBadge from '@/components/common/planBadge';
-import PlanBadgeWrapper from './planBadgeWrapper';
 import { getCurrentUser } from '@/lib/getCurrentUser';
-import UserDropdownWrapper from './userDropDownWrapper';
 
 const header = async () => {
   const currentUser = await getCurrentUser();
@@ -33,7 +30,7 @@ const header = async () => {
         {isAuthenticated ? 
           <div className="flex gap-2 items-center">
             <NavLink href='/upload' className='hover:text-blue-500'>Upload PDF</NavLink>
-            <PlanBadgeWrapper />
+            <PlanBadge />
             {isAuthenticated && <UserDropdown />}
           </div> 
         : 

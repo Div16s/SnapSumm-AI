@@ -63,7 +63,7 @@ const PricingCard = ({id, title, price, description, items, paymentLink, email}:
                             {email ? "You're on free" : "Starter Plan"}
                         </Button>
                         :
-                        <Link href={paymentLink} 
+                        <Link href={email ? paymentLink : `/auth/sign-in`} 
                         className={cn("w-full rounded-full flex items-center justify-center gap-2 font-medium bg-linear-to-r from-blue-600 to-blue-400 hover:from-blue-400 hover:to-blue-600 text-white border-2 py-2 transition-colors duration-200", id==="pro" ? "border-blue-600" : "border-blue-100 from-blue-400 to-blue-600")}>
                             Buy Now
                             <ArrowRight className="w-5 h-5 animate-pulse" />
@@ -78,7 +78,6 @@ const PricingCard = ({id, title, price, description, items, paymentLink, email}:
 
 const PricingSection = () => {
     const {userInfo} = useAuth();
-    const [email, setEmail] = useState(userInfo?.email || "");
     const [proPlan, setProPlan] = useState(false);
     
     useEffect(() => {
@@ -147,7 +146,7 @@ const PricingSection = () => {
                 </div>
                 <div className="relative flex justify-center flex-col lg:flex-row items-center lg:items-stretech gap-8">
                     {PricingPlans.map((plan, index) => (
-                        <PricingCard key={index} {...plan}  email={email}/>
+                        <PricingCard key={index} {...plan}  email={userInfo?.email || ""}/>
                     ))}
                 </div>
             </div>

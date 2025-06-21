@@ -1,6 +1,7 @@
 import getDbConnection from './db';
 import { GetUserUploadCount } from './summary';
 import { PricingPlans } from '@/utils/constants';
+import bcrypt from 'bcryptjs';
 
 export const CreateUser = async (fullName: string, email: string, password: string) => {
     const sql = await getDbConnection();
@@ -12,9 +13,13 @@ export const CreateUser = async (fullName: string, email: string, password: stri
         throw new Error('User already exists');
     }
 
+    // Hash the password before storing it
+    const hashedPassword = await bcrypt.hash(password, 10);
+    console.log("🔒 Hashed password:", hashedPassword)
+
     const result = await sql`
         INSERT INTO users (full_name, email, password)
-        VALUES (${fullName}, ${email}, ${password})
+        VALUES (${fullName}, ${email}, ${hashedPassword})
         RETURNING *
     `;
 
@@ -52,10 +57,18 @@ export const UpdateUser = async (fullName: string, email: string, password?: str
 
 export const GetUserByEmailAndPassword = async (email: string, password: string) => {
     const sql = await getDbConnection();
-    const user = await sql`
-        SELECT * FROM users WHERE email = ${email} AND password = ${password}
+    // Decrypt the password before checking
+    const existingUser = await sql`
+        SELECT * FROM users WHERE email = ${email}
     `;
-    return user || null;
+    if (!existingUser.length) {
+        return null;
+    }
+    const isValid = await bcrypt.compare(password, existingUser[0].password);
+    if (!isValid) {
+        return null;
+    }
+    return existingUser;
 }
 
 export const GetUserPlan = async (email: string) => {
