@@ -21,6 +21,35 @@ export const CreateUser = async (fullName: string, email: string, password: stri
     return result[0];
 }
 
+export const UpdateUser = async (fullName: string, email: string, password?: string) => {
+    const sql = await getDbConnection();
+    const existingUser = await sql`
+        SELECT * FROM users WHERE email = ${email}
+    `;
+    if (!existingUser.length) {
+        throw new Error('User does not exist');
+    }
+
+    let result;
+
+    if (password) {
+        result = await sql`
+            UPDATE users
+            SET full_name = ${fullName}, password = ${password}
+            WHERE email = ${email}
+            RETURNING *
+        `;
+    } else {
+        result = await sql`
+            UPDATE users
+            SET full_name = ${fullName}
+            WHERE email = ${email}
+            RETURNING *
+        `;
+    }
+    return result[0];
+}
+
 export const GetUserByEmailAndPassword = async (email: string, password: string) => {
     const sql = await getDbConnection();
     const user = await sql`

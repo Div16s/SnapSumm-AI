@@ -199,3 +199,7 @@
 .scrollbar-hide-y::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera */
 }
+
+/* [data-radix-dialog-close] {
+  display: none !important;
+} */
